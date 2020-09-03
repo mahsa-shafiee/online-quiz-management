@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="/css/homeStyle.css"/>
+
+</head>
+<body style="background-color: rgba(255, 248, 220, 0.63);">
+
+<section class="section">
+    <div class="grid">
+        <div class="left-side-div">
+            <h1 class="left-side-heading">
+                <span style="color: #1b9097;">Login Page</span><br>
+                Please enter required information.
+            </h1>
+        </div>
+        <div style="margin-top: 26px;margin-left: 165px;">
+
+            <h2 class="right-side-heading login-heading">Admin Login</h2>
+
+            <form autocomplete="off" th:object="${admin}" th:action="@{/login}" method="post" class="m-t" role="form"
+                  data-toggle="validator"
+                  novalidate="true" id="login-form">
+
+                <div style="margin-top: -53px;margin-bottom: 7px;"
+                     th:if="${errorMessage}" class="alert alert-danger alert-message" role="alert"
+                     th:text="${errorMessage}">
+                </div>
+
+                <div class="form-group input-group has-feedback" style="margin-bottom: 30px;">
+                <span class="input-group-addon icon">
+                    <span class="glyphicon glyphicon-user"></span>
+                </span>
+                    <input type="text" id="user_name" placeholder="User Name" class="form-control input"
+                           required="" name="userName" value="">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group input-group has-feedback">
+                <span class="input-group-addon icon">
+                    <span class="glyphicon glyphicon-lock"></span>
+                </span>
+                    <input name="password" type="password" id="password" placeholder="Password"
+                           class="form-control input" required="" value="">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary block full-width m-b disabled loginBtn">Login</button>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+</body>
+</html>

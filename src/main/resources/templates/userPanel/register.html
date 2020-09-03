@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Registration Page</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/homeStyle.css"/>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+    <script src="/js/userValidation.js"></script>
+
+</head>
+
+<body>
+
+<section class="section">
+    <div class="grid">
+        <div class="left-side-div">
+            <h1 class="left-side-heading">
+                <span style="color: #1b9097;">Registration Page</span><br>
+                Please enter required information.
+            </h1>
+        </div>
+        <div class="right-side-div" style="margin-top: -44px">
+
+            <h2 class="right-side-heading register-heading">User Registration</h2>
+
+            <form autocomplete="off" class="m-t" data-toggle="validator"
+                  id="register-form" method="post" role="form" th:object="${user}" th:action="@{/register}">
+
+                <div th:if="${confirmationMessage}" class="alert alert-success alert-message"
+                     role="alert" th:text="${confirmationMessage}">
+                </div>
+
+                <div th:if="${errorMessage}" class="alert alert-danger alert-message"
+                     role="alert" th:text="${errorMessage}">
+                </div>
+
+                <div id="error" class="alert alert-info">
+                    An email will send for you to finalize registration process.
+                </div>
+
+                <div class="form-group input-group has-feedback">
+                            <span class="input-group-addon icon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                    <input type="text" id="name" placeholder="First Name" class="input form-control" required=""
+                           name="name" value="">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group input-group has-feedback">
+                            <span class="input-group-addon icon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                    <input type="text" id="family" placeholder="Last Name" class="input form-control" required=""
+                           name="family" value="">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group input-group has-feedback">
+                            <span class="input-group-addon icon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                    <select class="input form-control" required="" id="role" name="role">
+                        <option value="">Choose...</option>
+                        <option value="TEACHER">teacher</option>
+                        <option value="STUDENT">student</option>
+                    </select>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group input-group has-feedback">
+                            <span class="input-group-addon icon">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </span>
+                    <input type="email" id="email" placeholder="Email Address" class="input form-control" required=""
+                           name="emailAddress" value="">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group input-group has-feedback">
+                            <span class="input-group-addon icon">
+                                <span class="glyphicon glyphicon-lock"></span>
+                            </span>
+                    <input type="password" id="password" placeholder="Password" class="input form-control"
+                           name="password" required="" value="">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group input-group has-feedback">
+                            <span class="input-group-addon icon">
+                                <span class="glyphicon glyphicon-lock"></span>
+                            </span>
+                    <input type="password" id="confirm_password" placeholder="Confirm Password"
+                           class="input form-control" required="">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+
+                <button type="submit" id="submit" class="btn btn-primary block full-width m-b disabled registerBtn">
+                    Register
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</section>
+
+
+<script>
+    function showErrorMessage(error, event) {
+        document.getElementById("error").innerHTML = error;
+        $("#error").removeClass('alert-info');
+        $("#error").addClass('alert-danger');
+        event.preventDefault();
+    }
+</script>
+</body>
+
+</html>

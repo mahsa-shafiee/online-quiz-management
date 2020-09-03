@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300&display=swap');
+
+body {
+    background: rgba(255, 248, 220, 0.63);
+    font-family: Inter, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+.btn-space {
+    margin-left: 15px;
+}
+
+.center_div {
+    margin: 0 auto;
+}
+
+.inactiveLink {
+    pointer-events: none;
+    cursor: default;
+}
+
+h2 {
+    margin: 0;
+    padding: 24px;
+    font-size: 35px;
+    background: #35b8be;
+    color: white;
+    font-weight: 900;
+    box-shadow: 1px 1px 3px 0 #144258;
+    position: fixed;
+    width: 100%;
+}
+
+h1 {
+    font-weight: 400;
+    background: #35b8be;
+    padding: 20px;
+    color: white;
+    width: 331px;
+    font-size: 33px;
+    border-radius: 200px;
+}
+
+.btn {
+    background: aliceblue;
+    color: black;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border: 1px solid black;
+}
+
+.add-member-div {
+    padding-top: 135px;
+    border-right: 1px solid #2f6da5;
+    border-left: 1px solid #2f6da5;
+    box-shadow: 1px 1px 3px 0 #2f6da5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1000px;
+    background: #6db0d2d9;
+}
+
+.input {
+    background: #f0f9ff;
+    border-radius: 4px;
+    font-size: 16px;
+    height: 40px;
+}
+
+#msg {
+    box-sizing: border-box;
+    padding: 13px;
+    margin: -5px
+}
+
+.tableContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1000px;
+    box-shadow: 1px 1px 3px 0 #2f6da5;
+    background: #f0f9ff;
+    border: 1px solid #2f6da5;
+}
+
+.page-item-btn {
+    border: 1px solid #2f6da5;
+    font-size: 18px;
+    cursor: pointer;
+}

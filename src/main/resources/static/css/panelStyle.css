@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300&display=swap');
+
+* {
+    font-family: Inter, sans-serif;
+    background-color: rgba(255, 248, 220, 0.63);
+}
+
+.panel-container {
+    height: auto;
+    transform: scale(1.2);
+    font-style: normal;
+    text-align: center;
+    background-clip: border-box;
+}
+
+.large-heading {
+    margin-top: 120px;
+    margin-left: 0;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: hsla(0, 3.94%, 39.76%, 1.00);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: hsla(0, 3.94%, 39.76%, 1.00);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: hsla(0, 3.94%, 39.76%, 1.00);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: hsla(0, 3.94%, 39.76%, 1.00);
+    border-radius: 4px;
+    background-color: hsla(194, 60.57%, 32.80%, 1.00);
+    color: hsla(171, 35.85%, 82.33%, 1.00);
+    font-size: 58px;
+    line-height: 131px;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+}
+
+.small-heading {
+    margin-top: -1px;
+    margin-bottom: 35px;
+    background-color: transparent;
+    color: hsla(200, 12.28%, 23.75%, 1.00);
+    line-height: 81px;
+    font-style: italic;
+    letter-spacing: 1px;
+    text-indent: 0;
+    font-size: 46px;
+    font-weight: bold;
+}
+
+.coursesBtn {
+    margin-right: 40px;
+    margin-left: -83px;
+    margin-bottom: 0;
+    font-size: 23px;
+    width: 261px;
+    letter-spacing: 2px;
+    border: 1px solid #97b6c8;
+    border-radius: 80px;
+    background: #36b8be;
+    padding: 13px 4px;
+    color: #fffffffa;
+}
+
+.coursesBtn:hover {
+    transform: translate(10px, 0px);
+}
+
+.usersBtn {
+    position: absolute;
+    margin-top: 85px;
+    margin-right: 0;
+    margin-left: -106px;
+    font-size: 23px;
+    width: 261px;
+    letter-spacing: 2px;
+    border: 1px solid #97b6c8;
+    border-radius: 80px;
+    background: #36b8be;
+    padding: 13px 4px;
+    color: #fffffffa;
+}
+
+a {
+    color: #fffffffa;
+}
+
+a:hover {
+    color: #fffffffa;
+    text-decoration: none;
+}
+
+.usersBtn:hover {
+    transform: translate(-10px, 0px);
+}

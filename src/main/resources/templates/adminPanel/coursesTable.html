@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/js/coursesTable.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/coursesTableStyle.css"/>
+</head>
+
+<body>
+
+<h2> Admin Panel </h2>
+
+<div class="container center_div add_course_div">
+    <form style="height: 90px;" id="add-course" class="form-inline">
+        <label class="sr-only" for="name"></label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="name" placeholder="Name">
+
+        <label class="sr-only" for="classification"></label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="classification"
+               placeholder="Classification">
+
+        <button type="submit" id="add" class="btn btn-primary btn-space">Add new Course</button>
+
+        <br><br>
+        <h3 id="msg"></h3>
+    </form>
+</div>
+
+
+<div class="container tableContainer" id="coursesTable">
+    <h1>Courses Table</h1>
+    <br>
+    <table class="table table-striped" style="height: 210px;width: 1000px">
+
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Classification</th>
+            <th colspan="3">Action</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+
+        </tfoot>
+
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li id="prevPage" class="page-item"><a class="page-item-btn">Previous</a></li>
+            <li id="nextPage" class="page-item"><a class="page-item-btn">Next</a></li>
+        </ul>
+    </nav>
+</div>
+
+<hr>
+<a th:href="@{/}" style="margin-bottom: 21px;margin-left: 139px;"
+   class="btn btn-primary block full-width m-b">Back to home</a>
+<a th:href="@{/panel}" style="margin-bottom: 21px;position: absolute;margin-left: 720px;"
+   class="btn btn-primary block full-width m-b">Back to panel</a>
+
+</body>
+</html>

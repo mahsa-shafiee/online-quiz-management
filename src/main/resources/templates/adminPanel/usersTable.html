@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/js/usersTable.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/usersTableStyle.css"/>
+
+</head>
+
+<body id="body">
+
+<h2> Admin Panel </h2>
+<br/>
+
+<div class="container center_div search-div">
+    <form id="search-user" class="form-inline" style="height: 130px;">
+        <label class="sr-only" for="name"></label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="name" placeholder="First Name">
+
+        <label class="sr-only" for="family"></label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="family" placeholder="Last Name">
+
+        <label class="sr-only" for="emailAddress"></label>
+        <input type="text" class="form-control input" id="emailAddress" placeholder="Email Address">
+
+        <label class="sr-only" for="password"></label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="password" placeholder="Password">
+
+        <label class="sr-only" for="role"></label>
+        <input style="margin-top: 16px" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="role"
+               placeholder="Role">
+
+        <label class="sr-only" for="registrationStatus"></label>
+        <input style="margin-top: 16px" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input"
+               id="registrationStatus"
+               placeholder="Registration Status	">
+
+        <br><br>
+        <button type="submit" id="search" class="btn btn-primary btn-space searchBtn">Search</button>
+    </form>
+</div>
+
+
+<div class="container tableContainer" id="usersTable">
+    <h1>Users Table</h1>
+    <br/>
+    <table class="table table-striped" style="height: 210px;width: 1000px">
+
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email Address</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Registration Status</th>
+            <th colspan="2">Action</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+
+        </tfoot>
+
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li id="prevPage" class="page-item"><a class="page-item-btn">Previous</a></li>
+            <li id="nextPage" class="page-item"><a class="page-item-btn">Next</a></li>
+        </ul>
+    </nav>
+</div>
+
+<hr>
+<a th:href="@{/}" style="margin-bottom: 21px;margin-left: 139px;" class="btn btn-primary block full-width m-b">Back to
+    home</a>
+<a th:href="@{/panel}" style="margin-bottom: 21px;position: absolute;margin-left: 720px;"
+   class="btn btn-primary block full-width m-b">Back to panel</a>
+
+</body>
+</html>
