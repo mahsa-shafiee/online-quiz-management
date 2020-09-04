@@ -48,6 +48,10 @@ public class User {
     @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
     private List<Course> courses;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
+    private List<Quiz> createdQuizzes;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
