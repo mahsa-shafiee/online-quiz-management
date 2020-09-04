@@ -1,6 +1,6 @@
 package com.maktab.onlineQuizManagement.model.dao;
 
-import com.maktab.onlineQuizManagement.model.entity.User.User;
+import com.maktab.onlineQuizManagement.model.entity.User;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -15,6 +15,8 @@ public interface UserDao extends PagingAndSortingRepository<User, Integer>, JpaS
     List<User> findAll();
 
     Optional<User> findByEmailAddress(String emailAddress);
+
+    Optional<User> findByEmailAddressAndPassword(String emailAddress, String password);
 
     Optional<User> findByConfirmationToken(String token);
 

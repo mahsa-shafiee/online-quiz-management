@@ -2,11 +2,9 @@ package com.maktab.onlineQuizManagement.service;
 
 import com.maktab.onlineQuizManagement.model.dao.CourseDao;
 import com.maktab.onlineQuizManagement.model.entity.Course;
-import com.maktab.onlineQuizManagement.model.entity.User.User;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;

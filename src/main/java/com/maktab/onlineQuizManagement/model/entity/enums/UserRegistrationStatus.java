@@ -1,4 +1,4 @@
-package com.maktab.onlineQuizManagement.model.entity.User;
+package com.maktab.onlineQuizManagement.model.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

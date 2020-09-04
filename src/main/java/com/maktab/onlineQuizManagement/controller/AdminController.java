@@ -3,7 +3,6 @@ package com.maktab.onlineQuizManagement.controller;
 import com.maktab.onlineQuizManagement.exception.DuplicateEmailException;
 import com.maktab.onlineQuizManagement.model.entity.Course;
 import com.maktab.onlineQuizManagement.model.entity.CourseClassification;
-import com.maktab.onlineQuizManagement.model.entity.User.User;
 import com.maktab.onlineQuizManagement.service.CourseClassificationService;
 import com.maktab.onlineQuizManagement.service.CourseService;
 import com.maktab.onlineQuizManagement.service.UserService;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Objects;
 
 @Controller
 public class AdminController {

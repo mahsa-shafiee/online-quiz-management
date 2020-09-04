@@ -2,42 +2,70 @@ package com.maktab.onlineQuizManagement.service;
 
 import com.maktab.onlineQuizManagement.model.dao.UserDao;
 import com.maktab.onlineQuizManagement.model.dao.UserSpecifications;
-import com.maktab.onlineQuizManagement.model.entity.User.User;
-import com.maktab.onlineQuizManagement.model.entity.User.UserRegistrationStatus;
+import com.maktab.onlineQuizManagement.model.entity.Course;
+import com.maktab.onlineQuizManagement.model.entity.Role;
+import com.maktab.onlineQuizManagement.model.entity.User;
+import com.maktab.onlineQuizManagement.model.entity.enums.UserRegistrationStatus;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
-public class UserService {
+@Log4j2
+@Transactional
+public class UserService implements UserDetailsService {
     private final UserDao userDao;
+    private final RoleService roleService;
+
+    private final PasswordEncoder passwordEncoder;
     private final static int PAGE_SIZE = 5;
 
-    public UserService(UserDao userDao) {
+    public UserService(UserDao userDao, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     public void saveUser(User user) {
         userDao.save(user);
     }
 
-    public void registerNewUser(User user) {
+    public void registerNewUser(User user, HttpServletRequest request) {
+        Role role = roleService.getRole(request.getParameter("role"));
+        user.setRoles(Collections.singletonList(role));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRegistrationStatus(UserRegistrationStatus.NOT_CONFIRMED);
         user.setConfirmationToken(UUID.randomUUID().toString());
+        saveUser(user);
+//        emailService.sendRegistrationEmail(user, request);
+    }
+
+    public void confirmUserRegistration(String token) {
+        User user = findByConfirmationToken(token);
+        user.setRegistrationStatus(UserRegistrationStatus.WAITING_FOR_CONFIRMATION);
         saveUser(user);
     }
 
     public User findByEmailAddress(String emailAddress) {
         Optional<User> found = userDao.findByEmailAddress(emailAddress);
+        return found.orElse(null);
+    }
+
+    public User findByEmailAddressAndPassword(User user) {
+        Optional<User> found = userDao.findByEmailAddressAndPassword(user.getEmailAddress(), user.getPassword());
         return found.orElse(null);
     }
 
@@ -63,7 +91,6 @@ public class UserService {
     public List<User> search(String name,
                              String family,
                              String emailAddress,
-                             String password,
                              String role,
                              String registrationStatus,
                              int pageNumber) {
@@ -73,20 +100,14 @@ public class UserService {
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE, Sort.Direction.ASC, "id");
 
         List<User> users = userDao.findAll(UserSpecifications.findMaxMatch
-                (name, family, emailAddress, password, role, registrationStatus), pageRequest)
+                (name, family, emailAddress, role, registrationStatus), pageRequest)
                 .getContent();
 
-        return users.isEmpty() ? search
-                (name, family, emailAddress, password, role, registrationStatus, --pageNumber)
-                : users;
+        return users;
     }
 
     public User getUser(int id) {
         return userDao.findById(id).orElse(null);
-    }
-
-    public void deleteUser(@PathVariable("id") int id) {
-        userDao.deleteById(id);
     }
 
     public void updateUser(@RequestBody User user) {
@@ -96,7 +117,33 @@ public class UserService {
         userDao.save(user);
     }
 
-    public void addUser(@RequestBody User user) {
-        userDao.save(user);
+    public List<Course> getCoursePage(int id, int page) {
+        List<Course> courses = findById(id).getCourses();
+
+        courses = courses.stream()
+                .sorted(Comparator.comparingInt(Course::getId))
+                .skip((page - 1) * PAGE_SIZE)
+                .limit(PAGE_SIZE)
+                .collect(Collectors.toList());
+
+        return courses;
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
+        Optional<User> user = userDao.findByEmailAddress(emailAddress);
+        if (!user.isPresent()) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.get().getEmailAddress(),
+                passwordEncoder.encode(user.get().getPassword()),
+                mapRolesToAuthorities(user.get().getRoles()));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
+    }
+
 }

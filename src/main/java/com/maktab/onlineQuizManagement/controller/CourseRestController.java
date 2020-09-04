@@ -2,7 +2,6 @@ package com.maktab.onlineQuizManagement.controller;
 
 import com.maktab.onlineQuizManagement.model.entity.Course;
 import com.maktab.onlineQuizManagement.model.entity.CourseClassification;
-import com.maktab.onlineQuizManagement.model.entity.User.User;
 import com.maktab.onlineQuizManagement.service.CourseClassificationService;
 import com.maktab.onlineQuizManagement.service.CourseService;
 import com.maktab.onlineQuizManagement.service.UserService;

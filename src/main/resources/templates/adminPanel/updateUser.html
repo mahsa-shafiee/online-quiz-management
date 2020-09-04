@@ -73,7 +73,7 @@
                 </span>
                 <select class="form-control" th:field="*{role}" required>
                     <option value="">Choose...</option>
-                    <option th:each="role : ${T(com.maktab.onlineQuizManagement.model.entity.User.UserRole).values()}"
+                    <option th:each="role : ${T(com.maktab.onlineQuizManagement.model.entity.enums.UserRole).values()}"
                             th:value="${role}" th:text="${role.name}"></option>
                 </select>
                 <span class="glyphicon form-control-feedback"

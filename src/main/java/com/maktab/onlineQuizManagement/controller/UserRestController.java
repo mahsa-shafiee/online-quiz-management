@@ -1,7 +1,6 @@
 package com.maktab.onlineQuizManagement.controller;
 
-import com.maktab.onlineQuizManagement.model.entity.User.User;
-import com.maktab.onlineQuizManagement.model.entity.User.UserRegistrationStatus;
+import com.maktab.onlineQuizManagement.model.entity.enums.UserRegistrationStatus;
 import com.maktab.onlineQuizManagement.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;

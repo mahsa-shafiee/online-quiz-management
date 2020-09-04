@@ -1,7 +1,6 @@
 package com.maktab.onlineQuizManagement.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.maktab.onlineQuizManagement.model.entity.User.User;
 import lombok.*;
 
 import javax.persistence.*;
