@@ -3,9 +3,11 @@ package com.maktab.onlineQuizManagement.controller;
 import com.maktab.onlineQuizManagement.exception.DuplicateEmailException;
 import com.maktab.onlineQuizManagement.model.entity.Course;
 import com.maktab.onlineQuizManagement.model.entity.CourseClassification;
+import com.maktab.onlineQuizManagement.model.entity.User;
 import com.maktab.onlineQuizManagement.service.CourseClassificationService;
 import com.maktab.onlineQuizManagement.service.CourseService;
 import com.maktab.onlineQuizManagement.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@RequestMapping("/adminPanel")
+@Log4j2
 public class AdminController {
 
     private final UserService userService;
@@ -28,23 +32,23 @@ public class AdminController {
         this.courseService = courseService;
     }
 
-    @RequestMapping(value = "/panel", method = RequestMethod.GET)
-    public String showPanelPage(HttpServletRequest request) {
+    @RequestMapping(method = RequestMethod.GET)
+    public String showPanelPage() {
         return "adminPanel/adminPanelHome";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String showUsersPage(HttpServletRequest request) {
+    public String showUsersPage() {
         return "adminPanel/usersTable";
     }
 
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
-    public String showCoursesPage(HttpServletRequest request) {
+    public String showCoursesPage() {
         return "adminPanel/coursesTable";
     }
 
     @RequestMapping(value = "/course/members/{id}")
-    public String showCourseMembersPage(@PathVariable int id, HttpServletRequest request) {
+    public String showCourseMembersPage(@PathVariable int id) {
         return "adminPanel/courseMembersTable";
     }
 
@@ -71,8 +75,7 @@ public class AdminController {
 
     @RequestMapping(value = "/updateCourse", method = RequestMethod.POST)
     public ModelAndView processUpdateCourse(ModelAndView modelAndView,
-                                            @ModelAttribute("course") Course course,
-                                            HttpServletRequest request) {
+                                            @ModelAttribute("course") Course course) {
         CourseClassification found = classificationService.getByName(course.getClassification().getName());
         if (found != null) {
             course.setClassification(found);

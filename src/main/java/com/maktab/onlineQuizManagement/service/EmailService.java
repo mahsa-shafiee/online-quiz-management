@@ -1,5 +1,6 @@
 package com.maktab.onlineQuizManagement.service;
 
+import com.maktab.onlineQuizManagement.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

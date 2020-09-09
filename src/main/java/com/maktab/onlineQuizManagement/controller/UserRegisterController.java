@@ -3,8 +3,10 @@ package com.maktab.onlineQuizManagement.controller;
 import com.maktab.onlineQuizManagement.exception.DisabledTokenException;
 import com.maktab.onlineQuizManagement.exception.DuplicateEmailException;
 import com.maktab.onlineQuizManagement.exception.IncorrectTokenException;
+import com.maktab.onlineQuizManagement.model.entity.User;
 import com.maktab.onlineQuizManagement.model.entity.enums.UserRegistrationStatus;
 import com.maktab.onlineQuizManagement.service.EmailService;
+import com.maktab.onlineQuizManagement.service.RoleService;
 import com.maktab.onlineQuizManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 public class UserRegisterController {
 
     private UserService userService;
-    private EmailService emailService;
 
     @Autowired
-    public UserRegisterController(UserService userService, EmailService emailService) {
+    public UserRegisterController(UserService userService, EmailService emailService, RoleService roleService) {
         this.userService = userService;
-        this.emailService = emailService;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -41,8 +41,7 @@ public class UserRegisterController {
             User found = userService.findByEmailAddress(user.getEmailAddress());
             if (found != null)
                 throw new DuplicateEmailException("There is already a user registered with the email provided.");
-            userService.registerNewUser(user);
-            emailService.sendRegistrationEmail(user, request);
+            userService.registerNewUser(user, request);
             modelAndView.addObject("confirmationMessage",
                     "A confirmation e-mail has been successfully sent to " + user.getEmailAddress());
         } catch (DuplicateEmailException e) {
@@ -75,9 +74,7 @@ public class UserRegisterController {
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public ModelAndView processConfirmationForm(ModelAndView modelAndView,
                                                 @RequestParam String token) {
-        User user = userService.findByConfirmationToken(token);
-        user.setRegistrationStatus(UserRegistrationStatus.WAITING_FOR_CONFIRMATION);
-        userService.saveUser(user);
+        userService.confirmUserRegistration(token);
         modelAndView.addObject("successMessage",
                 "You registered successfully.");
         modelAndView.setViewName("userPanel/confirmRegistration");

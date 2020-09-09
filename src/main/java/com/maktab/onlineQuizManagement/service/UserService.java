@@ -6,7 +6,6 @@ import com.maktab.onlineQuizManagement.model.entity.Course;
 import com.maktab.onlineQuizManagement.model.entity.Role;
 import com.maktab.onlineQuizManagement.model.entity.User;
 import com.maktab.onlineQuizManagement.model.entity.enums.UserRegistrationStatus;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,7 +23,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@Log4j2
 @Transactional
 public class UserService implements UserDetailsService {
     private final UserDao userDao;
@@ -146,4 +144,14 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
+    public Object confirmUserRegistration(int id) {
+        User user = getUser(id);
+        if (user.getRegistrationStatus().equals(UserRegistrationStatus.CONFIRMED)) {
+            return null;
+        } else {
+            user.setRegistrationStatus(UserRegistrationStatus.CONFIRMED);
+            updateUser(user);
+            return user;
+        }
+    }
 }
