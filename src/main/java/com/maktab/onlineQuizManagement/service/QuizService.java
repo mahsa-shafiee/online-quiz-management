@@ -3,8 +3,10 @@ package com.maktab.onlineQuizManagement.service;
 import com.maktab.onlineQuizManagement.model.dao.QuizDao;
 import com.maktab.onlineQuizManagement.model.entity.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -20,14 +22,18 @@ public class QuizService {
     private final QuestionService questionService;
     private final QuizQuestionsService quizQuestionsService;
     private final CourseClassificationService classificationService;
+    private final UserQuizService userQuizService;
+    private final StudentService studentService;
 
-    public QuizService(QuizDao quizDao, CourseService courseService, UserService userService, QuestionService questionService, QuizQuestionsService quizQuestionsService, CourseClassificationService classificationService) {
+    public QuizService(QuizDao quizDao, CourseService courseService, UserService userService, QuestionService questionService, QuizQuestionsService quizQuestionsService, CourseClassificationService classificationService, UserQuizService userQuizService, StudentService studentService) {
         this.quizDao = quizDao;
         this.courseService = courseService;
         this.userService = userService;
         this.questionService = questionService;
         this.quizQuestionsService = quizQuestionsService;
         this.classificationService = classificationService;
+        this.userQuizService = userQuizService;
+        this.studentService = studentService;
     }
 
     public Quiz addNewQuiz(Quiz quiz) {
@@ -64,6 +70,29 @@ public class QuizService {
         quiz.setEnabled(false);
         saveQuiz(quiz);
         return quiz;
+    }
+
+    public List<User> getParticipantsPage(int id, int page, String name, String family, String emailAddress) {
+        Set<UserQuizzes> participants = findById(id).getParticipants();
+
+        List<User> collect = participants.stream()
+                .map(UserQuizzes::getPrimaryKey)
+                .map(UserQuizId::getUser)
+                .sorted(Comparator.comparingInt(User::getId))
+                .skip((page - 1) * PAGE_SIZE)
+                .limit(PAGE_SIZE)
+                .collect(Collectors.toList());
+
+        if (!StringUtils.isEmpty(name) || name.length() != 0) {
+            collect = collect.stream().filter(user -> user.getName().contains(name)).collect(Collectors.toList());
+        }
+        if (!StringUtils.isEmpty(family) || family.length() != 0) {
+            collect = collect.stream().filter(user -> user.getFamily().contains(family)).collect(Collectors.toList());
+        }
+        if (!StringUtils.isEmpty(emailAddress) || emailAddress.length() != 0) {
+            collect = collect.stream().filter(user -> user.getEmailAddress().contains(emailAddress)).collect(Collectors.toList());
+        }
+        return collect;
     }
 
     public List<Question> getQuestionsPage(int id, int page) {
@@ -115,5 +144,48 @@ public class QuizService {
             classification.getQuestionBank().add(question);
             classificationService.saveCourse(classification);
         }
+    }
+
+    public Question getQuizQuestion(int quizId, int userId, int number) {
+        Quiz quiz = findById(quizId);
+        Student student = studentService.findById(userId);
+        if (userQuizService.findByPrimaryKey(userId, quizId) == null) {
+            UserQuizId userQuizId = new UserQuizId();
+            userQuizId.setQuiz(quiz);
+            userQuizId.setUser(student);
+            UserQuizzes userQuizzes = new UserQuizzes();
+            userQuizzes.setPrimaryKey(userQuizId);
+            student.getParticipatedQuizzes().add(userQuizzes);
+            studentService.save(student);
+        }
+        List<Question> collect = getQuestionOfQuiz(quiz);
+        return collect.get(number);
+    }
+
+    public Question saveAnswer(int quizId, int userId, int number, String answer) {
+        UserQuizzes stdQuiz = userQuizService.findByPrimaryKey(userId, quizId);
+        stdQuiz.getAnswersOfQuestions().put(number, answer);
+        userQuizService.save(stdQuiz);
+
+        Quiz quiz = findById(quizId);
+        List<Question> collect = getQuestionOfQuiz(quiz);
+        Question question = collect.get(number);
+        if (question instanceof MultipleChoiceQuestion) {
+            if (((MultipleChoiceQuestion) question).getCorrectOption().equals(answer)) {
+                stdQuiz.setTotalScore(stdQuiz.getTotalScore() + 1);
+                userQuizService.save(stdQuiz);
+            }
+        }
+        return question;
+    }
+
+    private List<Question> getQuestionOfQuiz(Quiz quiz) {
+        List<QuizQuestions> list = new ArrayList<>(quiz.getQuizQuestions());
+        return list
+                .stream()
+                .map(QuizQuestions::getPrimaryKey)
+                .map(QuizQuestionId::getQuestion)
+                .sorted(Comparator.comparingInt(Question::getId))
+                .collect(Collectors.toList());
     }
 }

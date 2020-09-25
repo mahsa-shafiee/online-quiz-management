@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/js/quizResult.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"
+            integrity="sha512-8vfyGnaOX2EeMypNMptU+MwwK206Jk1I/tMQV4NkhOz+W8glENoMhGyU6n/6VgQUhQcJH8NqQgHhMtZjJJBv3A=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.js"
+            integrity="sha512-aVnPFUGTiptfhBMaq2MLZfzSbt0LZbP6Eb1yXpSHQ1YIgJaVvWvtKi0uQGggaeQH+irK/7xc1r44dDrpzt6BCw=="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/coursesTableStyle.css"/>
+</head>
+<body>
+<h2> Teacher Panel </h2>
+
+<input type="hidden" id="quizId" th:value="${quizId}">
+<input type="hidden" id="userId" th:value="${userId}">
+
+<div class="container tableContainer" id="questionsTable">
+    <h1 style="margin-top: 110px">Quiz Result</h1><br>
+
+    <p id="question"></p>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li id="nextPage" class="page-item"><a class="page-item-btn" id="next">Next</a></li>
+        </ul>
+    </nav>
+</div>
+
+<a th:href="@{/}" style="margin-top: 40px;margin-left: 139px" class="btn btn-primary block full-width m-b">
+    Back to panel</a>
+<a th:href="@{/signOut}" style="margin-top:40px;position: absolute;margin-left: 720px"
+   class="btn btn-primary block full-width m-b">Sign out</a>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Update Quiz</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/updateUserStyle.css"/>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div class="container container-div">
+
+        <h3 class="heading">Quiz Update</h3>
+
+        <form style="width: 700px" autocomplete="off" th:action="@{/userPanel/updateQuiz}" id="myForm"
+              th:object="${quiz}" method="post" class="m-t" role="form"
+              data-toggle="validator">
+
+            <div th:if="${confirmationMessage}" class="alert alert-success message"
+                 role="alert" th:text="${confirmationMessage}"></div>
+
+            <div th:if="${errorMessage}" class="alert alert-danger message"
+                 role="alert" th:text="${errorMessage}"></div>
+
+            <div style="padding: 0;border: 0" id="error" class="alert alert-danger" role="alert"></div>
+
+            <input type="hidden" name="id" th:value="${id}">
+
+            <div class="form-group input-group has-feedback">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-user"></span>
+                </span>
+                <input type="text" th:field="*{topic}" id="topic"
+                       placeholder="Topic" class="form-control" required/>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
+
+            <div class="form-group input-group has-feedback">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-user"></span>
+                </span>
+                <input type="text" th:field="*{description}" id="description"
+                       placeholder="Description" class="form-control" required/>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
+
+            <div class="form-group input-group has-feedback">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </span>
+                <input type="number" th:field="*{duration}" id="duration"
+                       placeholder="Duration" class="form-control"
+                       data-error="This email address is invalid" required/>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
+
+            <div class="form-group input-group has-feedback">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-lock"></span>
+                </span>
+                <input type="datetime-local" step="1" name="startDate"
+                       id="startDate" placeholder="Start" class="form-control" required/>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
+
+            <div class="form-group input-group has-feedback">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-lock"></span>
+                </span>
+                <input type="datetime-local" step="1" name="endDate"
+                       id="endDate" placeholder="End" class="form-control" required/>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
+
+            <button style="width: 700px;" type="submit" id="submit" class="btn btn-primary block full-width m-b">Save
+            </button>
+
+        </form>
+        <br><br>
+
+        <a style="width: 700px;" th:href="@{/users}" class="btn btn-primary block full-width m-b">Back</a>
+    </div>
+</div>
+
+<script>
+    function showErrorMessage(error, event) {
+        document.getElementById("error").innerHTML = error;
+        $("#error").css("padding", "15px");
+        $("#error").css("border", "1px");
+        $("#error").css("margin-top", "-47px");
+        event.preventDefault();
+    }
+</script>
+</body>
+</html>

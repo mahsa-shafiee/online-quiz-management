@@ -172,3 +172,16 @@ a:hover {
     color: hsla(281, 69.06%, 6.31%, 0.86);
     text-decoration: none;
 }
+
+#sign-up-div {
+    font-size: 21px;
+    display: flex;
+    margin-top: 11px;
+    margin-left: 54px;
+}
+
+#sign-up-link {
+    margin-left: 6px;
+    color: #3030dc;
+    cursor: pointer;
+}

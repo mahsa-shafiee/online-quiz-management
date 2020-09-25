@@ -54,13 +54,13 @@ public class CourseManagementRestController {
         return courseService.getMembers(id, page);
     }
 
-    @GetMapping("members/{id}/add")
+    @GetMapping("/members/{id}/add")
     public Object addMember(@PathVariable("id") int id,
                             @RequestParam int userId) {
         return courseService.addNewMember(id, userId);
     }
 
-    @DeleteMapping("members/{id}/delete")
+    @DeleteMapping("/members/{id}/delete")
     public User deleteMember(@PathVariable("id") int id,
                              @RequestParam int userId) {
         return courseService.deleteMember(id, userId);

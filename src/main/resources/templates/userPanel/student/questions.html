@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/js/studentQuestionsTable.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/coursesTableStyle.css"/>
+</head>
+<body>
+<h2> Student Panel </h2>
+
+<input type="hidden" id="quizId" th:value="${quizId}">
+<input type="hidden" id="duration" th:value="${duration}">
+<input type="hidden" id="userId" th:value="${userId}">
+<input type="hidden" id="courseId" th:value="${courseId}">
+
+<div class="container tableContainer" id="questionsTable">
+    <h1 style="margin-top: 110px">Questions</h1><br>
+
+    <p id="question"></p>
+
+    <textarea id="answer" minlength="40" maxlength="40" style="display: none;overflow: hidden" cols="40"
+              rows="1"></textarea>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li id="prevPage" class="page-item"><a class="page-item-btn" id="prev">Previous</a></li>
+            <li id="nextPage" class="page-item"><a class="page-item-btn" id="next">Next</a></li>
+        </ul>
+    </nav>
+
+    <div id="clockDiv">
+        <div>
+            <span id="minutes"></span>
+            <div class="small-text">Minutes</div>
+        </div>
+        <div>
+            <span id="seconds"></span>
+            <div class="small-text">Seconds</div>
+        </div>
+    </div>
+</div>
+
+<a th:href="@{/}" style="margin-top: 40px;margin-left: 139px" class="btn btn-primary block full-width m-b">
+    Back to panel</a>
+<a th:href="@{/signOut}" style="margin-top:40px;position: absolute;margin-left: 720px"
+   class="btn btn-primary block full-width m-b">Sign out</a>
+
+</body>
+</html>

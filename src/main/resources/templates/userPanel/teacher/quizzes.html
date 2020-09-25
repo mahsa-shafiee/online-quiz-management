@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quizzes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/js/courseQuizzesTable.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/coursesTableStyle.css"/>
+</head>
+<body>
+<h2 style="position: absolute"> Teacher Panel </h2>
+<div class="container center_div add_course_div" style="padding-top: 105px">
+    <form style="height: 270px;" id="add-quiz" class="form-inline">
+
+        <div id="error" style="text-align: center;font-size: larger" class="alert alert-info">
+            Add New Quiz For The Course
+        </div>
+
+        <label class="sr-only" for="topic"
+               style="font-size: 14px;position: relative; height: fit-content;width: auto;margin: 0;">Topic</label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="topic" placeholder="Topic" required=""
+               style="margin-left: -39px;margin-top: 34px;position: absolute;">
+
+        <label class="sr-only" for="description"
+               style="font-size: 14px;position: relative; height: fit-content;width: auto;margin: 0;margin-left: 192px;">Description</label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="description" placeholder="Description"
+               required="" style="margin-left: -78px;margin-top: 34px;width: 368px;position: absolute;">
+
+        <label class="sr-only" for="duration"
+               style="font-size: 14px;position: relative; height: fit-content;width: auto;margin: 0;margin-left: 332px;">Duration</label>
+        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="duration"
+               placeholder="Duration in minutes" required=""
+               style="margin-left: -60px;margin-top: 34px;position: absolute;"><br>
+
+        <label class="sr-only" for="start"
+               style="font-size: 14px;position: relative; height: fit-content;width: auto;margin: 0;">Start</label>
+        <input type="datetime-local" step="1" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="start"
+               placeholder="Start" required="" style="margin-left: -37px;margin-top: 103px;position: absolute;">
+
+        <label class="sr-only" for="end"
+               style="font-size: 14px;position: relative; height: fit-content;width: auto;margin: 0;margin-top: 68px;margin-left: 290px;">End</label>
+        <input type="datetime-local" step="1" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="end" placeholder="End"
+               required="" style="
+    margin-left: -32px;
+    /* margin-right: 1021px; */
+    margin-top: 103px;
+    position: absolute;
+">
+
+        <button type="submit" id="add" class="btn btn-primary btn-space" style="margin-left: 328px;margin-top: 80px;">
+            Add New Quiz
+        </button>
+
+        <br><br>
+        <h3 id="msg"></h3>
+    </form>
+</div>
+<input type="hidden" id="courseId" th:value="${courseId}">
+<input type="hidden" id="userId" th:value="${userId}">
+
+<div class="container tableContainer" id="courseQuizzesTable">
+    <h1>Quizzes</h1>
+    <br>
+    <table class="table table-striped" style="height: 210px;width: 979px">
+
+        <thead>
+        <tr>
+            <th>Topic</th>
+            <th>Description</th>
+            <th>Duration</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Creator</th>
+            <th colspan="5">Action</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+
+        </tfoot>
+
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li id="prevPage" class="page-item"><a class="page-item-btn">Previous</a></li>
+            <li id="nextPage" class="page-item"><a class="page-item-btn">Next</a></li>
+        </ul>
+    </nav>
+</div>
+
+<a href="/" style="margin-top: 40px;margin-left: 139px" class="btn btn-primary block full-width m-b">Back to
+    panel</a>
+<a href="/signOut" style="margin-top:40px;position: absolute;margin-left: 720px"
+   class="btn btn-primary block full-width m-b">Sign out</a>
+
+</body>
+</html>

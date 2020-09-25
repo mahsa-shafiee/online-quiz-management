@@ -5,10 +5,10 @@ import com.maktab.onlineQuizManagement.exception.DuplicateEmailException;
 import com.maktab.onlineQuizManagement.exception.IncorrectTokenException;
 import com.maktab.onlineQuizManagement.model.entity.User;
 import com.maktab.onlineQuizManagement.model.entity.enums.UserRegistrationStatus;
-import com.maktab.onlineQuizManagement.service.EmailService;
-import com.maktab.onlineQuizManagement.service.RoleService;
 import com.maktab.onlineQuizManagement.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@Log4j2
 public class UserRegisterController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
-    public UserRegisterController(UserService userService, EmailService emailService, RoleService roleService) {
+    public UserRegisterController(UserService userService) {
         this.userService = userService;
     }
 

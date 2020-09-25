@@ -7,7 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -44,6 +46,9 @@ public class Quiz {
 
     @ManyToOne
     private User creator;
+
+    @OneToMany(mappedBy = "primaryKey.quiz", cascade = CascadeType.ALL)
+    private Set<UserQuizzes> participants = new HashSet<>();
 
     @OneToMany(mappedBy = "primaryKey.quiz", cascade = CascadeType.ALL)
     private Set<QuizQuestions> quizQuestions = new HashSet<>();

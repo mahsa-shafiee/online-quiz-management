@@ -63,7 +63,7 @@ public class WebController {
         quizService.addNewQuestion(question, Integer.parseInt(request.getParameter("id")), add);
 
         modelAndView.addObject("id", request.getParameter("id"));
-        modelAndView.setViewName("userPanel/questions");
+        modelAndView.setViewName("userPanel/teacher/questions");
         return modelAndView;
     }
 
@@ -73,7 +73,7 @@ public class WebController {
         question = (DescriptiveQuestion) questionService.save(question);
         quizService.addNewQuestion(question, Integer.parseInt(request.getParameter("id")), add);
         modelAndView.addObject("id", request.getParameter("id"));
-        modelAndView.setViewName("userPanel/questions");
+        modelAndView.setViewName("userPanel/teacher/questions");
         return modelAndView;
     }
 
@@ -92,7 +92,7 @@ public class WebController {
         } else {
             modelAndView.addObject("errorMessage", "Oops! Start date should be before end date.");
         }
-        modelAndView.setViewName("userPanel/updateQuiz");
+        modelAndView.setViewName("userPanel/teacher/updateQuiz");
         return modelAndView;
     }
 }

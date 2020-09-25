@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/js/quizQuestionsTable.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"
+            integrity="sha512-8vfyGnaOX2EeMypNMptU+MwwK206Jk1I/tMQV4NkhOz+W8glENoMhGyU6n/6VgQUhQcJH8NqQgHhMtZjJJBv3A=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.js"
+            integrity="sha512-aVnPFUGTiptfhBMaq2MLZfzSbt0LZbP6Eb1yXpSHQ1YIgJaVvWvtKi0uQGggaeQH+irK/7xc1r44dDrpzt6BCw=="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/coursesTableStyle.css"/>
+</head>
+<body>
+<h2> User Panel </h2>
+<div class="container center_div add_course_div">
+    <form style="height: 90px;position: relative;bottom: 40px" id="add-question" class="form-inline">
+        <h3>I want to add question,</h3>
+
+        <button type="submit" id="question-bank" class="btn btn-primary btn-space">Using question bank</button>
+
+        <button type="submit" id="new-question" class="btn btn-primary btn-space">Add new question</button>
+
+        <br><br>
+        <h3 id="msg"></h3>
+    </form>
+</div>
+
+<input type="hidden" id="id" th:value="${id}">
+
+<div class="container tableContainer" id="quizQuestionsTable">
+    <h1>Questions</h1>
+    <br>
+    <table class="table table-striped" style="height: 210px;width: 947px">
+
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Score</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+
+        </tfoot>
+
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li id="prevPage" class="page-item"><a class="page-item-btn">Previous</a></li>
+            <li id="nextPage" class="page-item"><a class="page-item-btn">Next</a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/js/questionBank.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/coursesTableStyle.css"/>
+</head>
+<body>
+<h2> User Panel </h2>
+
+<input type="hidden" id="id" th:value="${id}">
+
+<div class="container tableContainer" id="questionsTable">
+    <h1 style="margin-top: 130px">Questions</h1>
+    <br>
+    <table class="table table-striped" style="height: 210px;width: 1000px;">
+
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+
+        </tfoot>
+
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li id="prevPage" class="page-item"><a class="page-item-btn">Previous</a></li>
+            <li id="nextPage" class="page-item"><a class="page-item-btn">Next</a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

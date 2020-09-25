@@ -25,7 +25,7 @@
 
             <h2 class="right-side-heading login-heading">Admin Login</h2>
 
-            <form autocomplete="off" th:object="${admin}" th:action="@{/login}" method="post" class="m-t" role="form"
+            <form autocomplete="off" th:action="@{/adminPanel/login}" method="post" class="m-t" role="form"
                   data-toggle="validator"
                   novalidate="true" id="login-form">
 
@@ -39,7 +39,7 @@
                     <span class="glyphicon glyphicon-user"></span>
                 </span>
                     <input type="text" id="user_name" placeholder="User Name" class="form-control input"
-                           required="" name="userName" value="">
+                           required="" name="username" value="">
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 </div>
 

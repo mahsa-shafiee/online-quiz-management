@@ -14,7 +14,7 @@ $(document).ready(function () {
 
         table.on("click", "#members", (function () {
             var courseId = $(this).parent().find('#members').attr('value');
-            window.location.href = "/course/members/" + courseId;
+            window.location.href = "/adminPanel/course/members/" + courseId;
         }));
 
         table.on("click", "#delete", (function () {
@@ -108,7 +108,7 @@ function fillTable(data) {
             '<a style="cursor: pointer" id="members" value="' + element.id + '">' + 'members' + '</a>' +
             '</td>' +
             '<td>' +
-            '<a id="update" href="' + "/courses/update/" + element.id + '">' + 'update' + '</a>' +
+            '<a id="update" href="' + "/adminPanel/courses/update/" + element.id + '">' + 'update' + '</a>' +
             '</td></tr>'
         );
     });

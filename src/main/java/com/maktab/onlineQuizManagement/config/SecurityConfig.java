@@ -16,9 +16,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
     @Configuration
     @Order(1)
     public static class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
+        private final PasswordEncoder passwordEncoder;
+
+        public AdminSecurityConfig(PasswordEncoder passwordEncoder) {
+            this.passwordEncoder = passwordEncoder;
+        }
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.requestMatcher(new AntPathRequestMatcher("/adminPanel/**"))
@@ -43,15 +55,10 @@ public class SecurityConfig {
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+            auth.inMemoryAuthentication().passwordEncoder(passwordEncoder)
                     .withUser("mahsa")
-                    .password(passwordEncoder().encode("1234"))
+                    .password(passwordEncoder.encode("1234"))
                     .roles("ADMIN");
-        }
-
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
         }
     }
 
@@ -71,7 +78,7 @@ public class SecurityConfig {
             http.requestMatcher(new AntPathRequestMatcher("/userPanel/**"))
                     .csrf().disable()
                     .authorizeRequests()
-                    .antMatchers("/userPanel/**").access("hasRole('ROLE_TEACHER')")
+                    .antMatchers("/userPanel/**").hasAnyRole("TEACHER","STUDENT")
                     .and()
                     .formLogin()
                     .loginPage("/userPanel/login")

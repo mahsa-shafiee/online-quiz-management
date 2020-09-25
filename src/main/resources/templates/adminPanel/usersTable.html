@@ -31,9 +31,6 @@
         <label class="sr-only" for="emailAddress"></label>
         <input type="text" class="form-control input" id="emailAddress" placeholder="Email Address">
 
-        <label class="sr-only" for="password"></label>
-        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="password" placeholder="Password">
-
         <label class="sr-only" for="role"></label>
         <input style="margin-top: 16px" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0 input" id="role"
                placeholder="Role">
@@ -50,7 +47,7 @@
 
 
 <div class="container tableContainer" id="usersTable">
-    <h1>Users Table</h1>
+    <h1>Users</h1>
     <br/>
     <table class="table table-striped" style="height: 210px;width: 1000px">
 
@@ -60,7 +57,6 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email Address</th>
-            <th>Password</th>
             <th>Role</th>
             <th>Registration Status</th>
             <th colspan="2">Action</th>
@@ -82,8 +78,7 @@
 </div>
 
 <hr>
-<a th:href="@{/}" style="margin-bottom: 21px;margin-left: 139px;" class="btn btn-primary block full-width m-b">Back to
-    home</a>
+<a th:href="@{/signOut}" style="margin-bottom: 21px;margin-left: 139px;" class="btn btn-primary block full-width m-b">Sign out</a>
 <a th:href="@{/panel}" style="margin-bottom: 21px;position: absolute;margin-left: 720px;"
    class="btn btn-primary block full-width m-b">Back to panel</a>
 

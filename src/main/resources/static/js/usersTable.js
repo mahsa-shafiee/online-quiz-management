@@ -39,15 +39,13 @@ function updateTable(event, page, isSubmit) {
     var name = $('#name').val();
     var family = $('#family').val();
     var emailAddress = $('#emailAddress').val();
-    var password = $('#password').val();
     var role = $('#role').val();
     var registrationStatus = $('#registrationStatus').val();
 
     $.ajax({
         type: 'get',
         url: window.location + "/search/" + page + "?name=" + name + "&&family=" + family
-            + "&&emailAddress=" + emailAddress + "&&password=" + password
-            + "&&role=" + role + "&&registrationStatus=" + registrationStatus,
+            + "&&emailAddress=" + emailAddress + "&&role=" + role + "&&registrationStatus=" + registrationStatus,
         contentType: "application/json",
         dataType: "json",
         async: false,

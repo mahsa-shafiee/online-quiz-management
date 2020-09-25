@@ -32,10 +32,12 @@ public class UserLoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView processLoginForm(@ModelAttribute("user") User user, ModelAndView modelAndView) {
-
-        User found = userService.findByEmailAddressAndPassword(user);
+        User found = userService.findByEmailAddress(user.getEmailAddress());
         modelAndView.addObject("userId", found.getId());
-        modelAndView.setViewName("userPanel/userPanelHome");
+        if (found.getRoles().get(0).getName().equals("ROLE_TEACHER"))
+            modelAndView.setViewName("userPanel/teacher/home");
+        else
+            modelAndView.setViewName("userPanel/student/home");
         return modelAndView;
     }
 }

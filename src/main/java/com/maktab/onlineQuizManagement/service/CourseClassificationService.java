@@ -1,6 +1,7 @@
 package com.maktab.onlineQuizManagement.service;
 
 import com.maktab.onlineQuizManagement.model.dao.CourseClassificationDao;
+import com.maktab.onlineQuizManagement.model.entity.Course;
 import com.maktab.onlineQuizManagement.model.entity.CourseClassification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

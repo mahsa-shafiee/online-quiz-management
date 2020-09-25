@@ -9,8 +9,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "emailAddress"))
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
@@ -48,10 +50,6 @@ public class User {
     @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
     private List<Course> courses;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
-    private List<Quiz> createdQuizzes;
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -59,5 +57,6 @@ public class User {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private List<Role> roles;
+
 }

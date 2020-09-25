@@ -29,7 +29,7 @@ public class QuestionRestController {
     @GetMapping("/addFromBank")
     public ModelAndView getQuestionBank(@RequestParam int quizId, ModelAndView modelAndView) {
         modelAndView.addObject("id", quizId);
-        modelAndView.setViewName("userPanel/questionBank");
+        modelAndView.setViewName("userPanel/teacher/questionBank");
         return modelAndView;
     }
 
@@ -47,7 +47,7 @@ public class QuestionRestController {
     public ModelAndView showDescriptionQuestionForm(@RequestParam int quizId, ModelAndView modelAndView) {
         modelAndView.addObject("id", quizId);
         modelAndView.addObject("question", new DescriptiveQuestion());
-        modelAndView.setViewName("userPanel/addNewDescriptiveQuestion");
+        modelAndView.setViewName("userPanel/teacher/addNewDescriptiveQuestion");
         return modelAndView;
     }
 
@@ -55,7 +55,7 @@ public class QuestionRestController {
     public ModelAndView showMultipleChoiceQuestionForm(@RequestParam int quizId, ModelAndView modelAndView) {
         modelAndView.addObject("id", quizId);
         modelAndView.addObject("question", new MultipleChoiceQuestion());
-        modelAndView.setViewName("userPanel/addNewMultipleChoiceQuestion");
+        modelAndView.setViewName("userPanel/teacher/addNewMultipleChoiceQuestion");
         return modelAndView;
     }
 

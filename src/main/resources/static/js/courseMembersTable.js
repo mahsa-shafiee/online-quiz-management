@@ -1,4 +1,4 @@
-var courseId = window.location.toString().split("/")[5];
+var courseId = window.location.toString().split("/")[6];
 
 $(document).ready(function () {
 
@@ -21,7 +21,7 @@ $(document).ready(function () {
 function addNewMember(event, page, userId) {
     $.ajax({
         type: 'get',
-        url: "http://localhost:8080/courses/members/" + courseId + "/add?userId=" + userId,
+        url: "http://localhost:8080/adminPanel/courses/members/" + courseId + "/add?userId=" + userId,
         contentType: "application/json",
         dataType: "json",
         async: false,
@@ -47,7 +47,7 @@ function showMessage(message) {
 function deleteMember(event, page, userId) {
     $.ajax({
         type: 'delete',
-        url: "http://localhost:8080/courses/members/" + courseId + "/delete?userId=" + userId,
+        url: "http://localhost:8080/adminPanel/courses/members/" + courseId + "/delete?userId=" + userId,
         contentType: "application/json",
         dataType: "json",
         async: false,
@@ -62,7 +62,7 @@ function deleteMember(event, page, userId) {
 function updateTable(event, page) {
     $.ajax({
         type: 'get',
-        url: "http://localhost:8080/courses/members/" + courseId + "?page=" + page,
+        url: "http://localhost:8080/adminPanel/courses/members/" + courseId + "?page=" + page,
         contentType: "application/json",
         dataType: "json",
         async: false,

@@ -5,6 +5,7 @@ import com.maktab.onlineQuizManagement.model.entity.Course;
 import com.maktab.onlineQuizManagement.model.entity.CourseClassification;
 import com.maktab.onlineQuizManagement.model.entity.Quiz;
 import com.maktab.onlineQuizManagement.model.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
